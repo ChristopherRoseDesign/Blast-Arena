@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour {
 	public Rigidbody rigidBody;
 	public XboxController controller;
 
-	public float movementSpeed = 30;
-	public float maxSpeed = 5;
+	public float movementSpeed = 30f;
+	public float maxSpeed = 5f;
 	public Vector3 previousRotationDirection = Vector3.forward;
 	public float bulletSpeed = 20;
 	private float shootingTimer;
@@ -29,14 +29,15 @@ public class PlayerController : MonoBehaviour {
 		
 	void Update () {
 		if (health <= 0) {
-		return;
+			Destroy (this.gameObject);
 		}
 		RotatePlayer ();
 		FireGun ();
+		MovePlayer ();
 	}
 
 	private void FireGun (){
-		if (XCI.GetAxis (XboxAxis.RightTrigger) > 0.1) {
+		if (XCI.GetAxis (XboxAxis.RightTrigger, controller) > 0.1) {
 			if (Time.time - shootingTimer > timeBetweenShots) {
 				GameObject GO = Instantiate (bulletPrefab, bulletSpawnPoint.position, Quaternion.identity) as GameObject;
 				GO.GetComponent<Rigidbody> ().AddForce (transform.forward * 20, ForceMode.Impulse);
@@ -44,10 +45,6 @@ public class PlayerController : MonoBehaviour {
 				shootingTimer = Time.time;
 				}
 		}
-	}
-
-	void FixedUpdate (){
-		MovePlayer ();
 	}
 
 	private void MovePlayer (){
@@ -71,5 +68,8 @@ public class PlayerController : MonoBehaviour {
 		directionVector = directionVector.normalized;
 		previousRotationDirection = directionVector;
 		transform.rotation = Quaternion.LookRotation (directionVector);
+	}
+	void OnTriggerEnter(Collider other){
+//		Destroy (other.gameObject);
 	}
 }
