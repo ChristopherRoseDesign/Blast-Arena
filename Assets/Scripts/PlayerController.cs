@@ -7,26 +7,41 @@ public class PlayerController : MonoBehaviour {
 	public Rigidbody rigidBody;
 	public XboxController controller;
 
+	//Indicates the movement speed of the players
 	public float movementSpeed = 30f;
+
+	//Indicates the players maximum speed
 	public float maxSpeed = 5f;
+
+
 	public Vector3 previousRotationDirection = Vector3.forward;
+
+	//Indicates bullet speed upon firing
 	public float bulletSpeed = 20;
+
 	private float shootingTimer;
+
+	//Indicates how long the players need to wait until they can shoot again
 	public float timeBetweenShots = 1f;
 
+	//Indicates the amount of health the players will have
 	public int health = 99;
 
 	public GameObject bulletPrefab;
 	public Transform bulletSpawnPoint;
 
+	//Called whenever the player takes damage
 	public void TakeDamage(int damageToTake){
 		health = health - damageToTake;
 	}
+
+	//Called on initialization
 	void Start (){
 		rigidBody = GetComponent<Rigidbody> ();
 		shootingTimer = Time.time;
 		}
 		
+	//Called on new frame
 	void Update () {
 		if (health <= 0) {
 			Destroy (this.gameObject);
@@ -36,6 +51,8 @@ public class PlayerController : MonoBehaviour {
 		MovePlayer ();
 	}
 
+	//Called when player fires weapon
+	//XCI and XboxAxis calls from XboxCtrrInput
 	private void FireGun (){
 		if (XCI.GetAxis (XboxAxis.RightTrigger, controller) > 0.1) {
 			if (Time.time - shootingTimer > timeBetweenShots) {
@@ -47,6 +64,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	//Calls whenever the player moves
 	private void MovePlayer (){
 		float axisX = XCI.GetAxis (XboxAxis.LeftStickX, controller);
 		float axisZ = XCI.GetAxis (XboxAxis.LeftStickY, controller);
@@ -57,6 +75,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	//Calls whenever player turns
 	private void RotatePlayer(){
 		float rotateAxisX = XCI.GetAxis (XboxAxis.RightStickX, controller);
 		float rotateAxisZ = XCI.GetAxis (XboxAxis.RightStickY, controller);
@@ -69,6 +88,8 @@ public class PlayerController : MonoBehaviour {
 		previousRotationDirection = directionVector;
 		transform.rotation = Quaternion.LookRotation (directionVector);
 	}
+
+	//Calls when collides with a trigger
 	void OnTriggerEnter(Collider other){
 //		Destroy (other.gameObject);
 	}

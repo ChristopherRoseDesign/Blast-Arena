@@ -9,22 +9,33 @@ public class MovementUpgrade : MonoBehaviour {
 
 	private float defMoveSpeed; 
 
+	//Indicated new movement speed
 	private float upgradeSpeed = 200f;
 
+	//Calls on collision with another object
 	void OnTriggerEnter (Collider other) {
-		defMoveSpeed = other.GetComponent<PlayerController> ().movementSpeed; //save default speed
-		other.GetComponent<PlayerController> ().movementSpeed = upgradeSpeed;  //upgrade speed
+		
+		//saves original speed of the object
+		defMoveSpeed = other.GetComponent<PlayerController> ().movementSpeed;
 
-		//Hide object
+		//upgrade speed
+		other.GetComponent<PlayerController> ().movementSpeed = upgradeSpeed;
+
+		//Hides object
 		gameObject.SetActive(false);
 
-		Invoke ("ResetSpeed", 2); //Function name, then delay time
+		//Calls function after set time
+		Invoke ("ResetSpeed", 2);
 	}
 
 
-
+	//Calls upon Invoke
 	void ResetSpeed(){
-		player.movementSpeed = defMoveSpeed; //reset speed
+		
+		//reset speed back to original
+		player.movementSpeed = defMoveSpeed;
+
+		//Destroys the object
 		Destroy(gameObject);
 	}
 }
