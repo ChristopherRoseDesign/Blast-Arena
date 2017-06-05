@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 		if (health <= 0) {
 			Destroy (this.gameObject);
 		}
+
 		RotatePlayer ();
 		FireGun ();
 		MovePlayer ();
@@ -87,10 +88,5 @@ public class PlayerController : MonoBehaviour {
 		directionVector = directionVector.normalized;
 		previousRotationDirection = directionVector;
 		transform.rotation = Quaternion.LookRotation (directionVector);
-	}
-
-	//Calls when collides with a trigger
-	void OnTriggerEnter(Collider other){
-//		Destroy (other.gameObject);
 	}
 }

@@ -8,7 +8,7 @@ public class BulletUpgrade : MonoBehaviour {
 	public PlayerController player;
 
 	//Indicates new speed
-	public float upgradeSpeed = 40;
+	public float upgradeSpeed = 200;
 
 	private float defMoveSpeed;
 
@@ -23,6 +23,16 @@ public class BulletUpgrade : MonoBehaviour {
 
 		//Hide object
 		gameObject.SetActive (false);
+
+		Invoke ("ResetSpeed", 5);
+	}
+
+	void ResetSpeed(){
+
+		//reset speed back to original
+		player.movementSpeed = defMoveSpeed;
+
+		//Destroys the object
+		Destroy(gameObject);
 	}
 }
-

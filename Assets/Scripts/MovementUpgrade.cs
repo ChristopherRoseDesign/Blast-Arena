@@ -10,7 +10,7 @@ public class MovementUpgrade : MonoBehaviour {
 	private float defMoveSpeed; 
 
 	//Indicated new movement speed
-	private float upgradeSpeed = 200f;
+	private float upgradeSpeed = 250f;
 
 	//Calls on collision with another object
 	void OnTriggerEnter (Collider other) {
@@ -25,7 +25,7 @@ public class MovementUpgrade : MonoBehaviour {
 		gameObject.SetActive(false);
 
 		//Calls function after set time
-		Invoke ("ResetSpeed", 2);
+		Invoke ("ResetSpeed", 7);
 	}
 
 

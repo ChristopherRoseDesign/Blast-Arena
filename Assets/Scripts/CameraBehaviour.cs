@@ -6,6 +6,7 @@ public class CameraBehaviour : MonoBehaviour {
 
 	public Transform player1;
 	public Transform player2;
+	public PlayerController player;
 
 	private const float distanceMargin = 1.0f;
 
