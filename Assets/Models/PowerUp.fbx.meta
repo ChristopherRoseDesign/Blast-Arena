@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6aa7af6d5b76f9142aa17f2d2913f1cd
-timeCreated: 1496107037
+guid: 5a853ae66ed2d8e48bcd8ee81a231f02
+timeCreated: 1496706255
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pCube1
+    4300000: PowerUp
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -72,7 +73,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

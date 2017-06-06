@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour {
 	public XboxController controller;
 
 	//Indicates the movement speed of the players
-	public float movementSpeed = 30f;
+	public float movementSpeed = 90f;
 
 	//Indicates the players maximum speed
-	public float maxSpeed = 5f;
+	public float maxSpeed = 15f;
 
 
 	public Vector3 previousRotationDirection = Vector3.forward;
@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour {
 		if (health <= 0) {
 			Destroy (this.gameObject);
 		}
-
 		RotatePlayer ();
 		FireGun ();
 		MovePlayer ();
@@ -70,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 		float axisX = XCI.GetAxis (XboxAxis.LeftStickX, controller);
 		float axisZ = XCI.GetAxis (XboxAxis.LeftStickY, controller);
 		Vector3 movement = new Vector3 (axisX, 0, axisZ);
-		rigidBody.AddForce (movement * movementSpeed);
+		rigidBody.AddForce (movement * movementSpeed * Time.deltaTime);
 		if (rigidBody.velocity.magnitude > maxSpeed) {
 			rigidBody.velocity = rigidBody.velocity.normalized * maxSpeed;
 		}
