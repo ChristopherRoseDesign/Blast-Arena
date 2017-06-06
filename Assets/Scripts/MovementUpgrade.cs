@@ -10,7 +10,7 @@ public class MovementUpgrade : MonoBehaviour {
 	private float defMoveSpeed; 
 
 	//Indicated new movement speed
-	private float upgradeSpeed = 250f;
+	private float upgradeSpeed = 600f;
 
 	//Calls on collision with another object
 	void OnTriggerEnter (Collider other) {

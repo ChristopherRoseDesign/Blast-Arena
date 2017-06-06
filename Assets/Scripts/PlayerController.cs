@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour {
 	public XboxController controller;
 
 	//Indicates the movement speed of the players
-	public float movementSpeed = 90f;
+	public float movementSpeed = 180f;
 
 	//Indicates the players maximum speed
-	public float maxSpeed = 15f;
+	public float maxSpeed = 30f;
 
 
 	public Vector3 previousRotationDirection = Vector3.forward;
