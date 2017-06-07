@@ -8,7 +8,7 @@ public class UpgradeSpawn : MonoBehaviour {
 	public GameObject spawnObject;
 
 	//Time Between Spawns
-	public float spawnTime = 20f;
+	public float spawnTime = 15f;
 
 	//Selection of potential points
 	public Transform[] spawnPoints;
@@ -25,7 +25,7 @@ public class UpgradeSpawn : MonoBehaviour {
 		//Finds a random index between zero and one less than the number of spawn points
 		int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
-		//Creates an instance of a prefab of the object at a selected spawn point
+		//Creates an instance of a prefab object at a selected spawn point
 		Instantiate (spawnObject, spawnPoints [spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
 	}
 }

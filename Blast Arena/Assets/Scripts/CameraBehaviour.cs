@@ -7,7 +7,7 @@ public class CameraBehaviour : MonoBehaviour {
 	public Transform player1;
 	public Transform player2;
 
-	private const float distanceMargin = 1.0f;
+	private const float distanceMargin = 2.0f;
 
 	private Vector3 middlePoint;
 	private float distanceFromMiddlePoint;
@@ -37,7 +37,7 @@ public class CameraBehaviour : MonoBehaviour {
 
 		//Calculates the new distance
 		distanceBetweenPlayers = vectorBetweenPlayers.magnitude;
-		cameraDistance = (distanceBetweenPlayers / 1.75f / aspectRatio) / tanFov;
+		cameraDistance = (distanceBetweenPlayers / aspectRatio) / tanFov;
 
 		//Moves camera to the new position
 		Vector3 focus = (Camera.main.transform.position - middlePoint).normalized;
