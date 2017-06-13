@@ -3,28 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour {
-
+//Indicates 1st object to follow
 	public Transform player1;
+//Indicates 2nd object to follow
 	public Transform player2;
-
+//Sets value of the margin on screen
 	private const float distanceMargin = 2.0f;
-
+//Middle point of the scene
 	private Vector3 middlePoint;
-	private float distanceFromMiddlePoint;
+//Sets reference of distance between players
 	private float distanceBetweenPlayers;
+//Sets reference to camera distance
 	private float cameraDistance;
+//Sets reference for aspect ratio
 	private float aspectRatio;
-	private float fov;
+//Sets reference for the tangent of the field of vision
 	private float tanFov;
 
-	//Calls on initialization
+	//---------------------------------------------------------------
+	//	Start()
+	// Called when the round begins
+	//
+	// Param:
+	//		
+	// Return:
+	//		Void
+	//---------------------------------------------------------------
 	void Start() {
 		//Locks aspect ratio
 		aspectRatio = Screen.width / Screen.height;
-		tanFov = Mathf.Tan(Mathf.Deg2Rad * Camera.main.fieldOfView / 2.0f);
+		tanFov = Mathf.Tan(Mathf.Deg2Rad * Camera.main.fieldOfView/ 2.0f);
 	}
 
-	//Calls every new frame
+	//---------------------------------------------------------------
+	//	Update()
+	// Called every new frame
+	//
+	// Param:
+	//		
+	// Return:
+	//		Void
+	//---------------------------------------------------------------
 	void Update () {
 		//Positions the camera center of the scene
 		Vector3 newCameraPos = Camera.main.transform.position;

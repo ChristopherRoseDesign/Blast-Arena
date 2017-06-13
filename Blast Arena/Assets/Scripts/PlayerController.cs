@@ -3,46 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 using XboxCtrlrInput;
 public class PlayerController : MonoBehaviour {
-
+//Indicates a Rigidbody in the scene
 	public Rigidbody rigidBody;
+//Indicates controller in use
 	public XboxController controller;
-
-	//Indicates the movement speed of the players
+//Indicates the movement speed of the players
 	public float movementSpeed = 180f;
-
-	//Indicates the players maximum speed
+//Indicates the players maximum speed
 	public float maxSpeed = 30f;
-
-
+//Set's rotation reference forward
 	public Vector3 previousRotationDirection = Vector3.forward;
-
-	//Indicates bullet speed upon firing
+//Indicates bullet speed upon firing
 	public float bulletSpeed = 20;
-
+//Indicates a time limit between shots
 	private float shootingTimer;
-
-	//Indicates how long the players need to wait until they can shoot again
+//Indicates how long the players need to wait until they can shoot again
 	public float timeBetweenShots = 1f;
-
-	//Indicates the amount of health the players will have
+//Indicates the amount of health the players will have
 	public int health = 99;
-
+//Takes bullet prefab from speed
 	public GameObject bulletPrefab;
+//Indicates a moving object in scene
 	public Transform bulletSpawnPoint;
 
-	//Called whenever the player takes damage
+//---------------------------------------------------------------
+//	TakeDamage()
+// Called when player is hit by a bullet
+//
+// Param:
+//		int damageToTake - defines damage player will take
+// Return:
+//		Void
+//---------------------------------------------------------------
 	public void TakeDamage(int damageToTake){
 		health = health - damageToTake;
 	}
 
-	//Called on initialization
-	void Start (){
+//---------------------------------------------------------------
+//	Start()
+// Called when the round begins
+//
+// Param:
+//		
+// Return:
+//		Void
+//---------------------------------------------------------------
+	private void Start (){
 		rigidBody = GetComponent<Rigidbody> ();
 		shootingTimer = Time.time;
 		}
 		
-	//Called on new frame
-	void Update () {
+//---------------------------------------------------------------
+//	Update()
+// Called on refresh
+//
+// Param:
+//		
+// Return:
+//		Void
+//---------------------------------------------------------------
+	private void Update () {
 		if (health <= 0) {
 			Destroy (this.gameObject);
 		}
@@ -51,8 +71,15 @@ public class PlayerController : MonoBehaviour {
 		MovePlayer ();
 	}
 
-	//Called when player fires weapon
-	//XCI and XboxAxis calls from XboxCtrrInput
+//---------------------------------------------------------------
+//	FireGun()
+// Called when player uses relevant control, creating a bullet
+//
+// Param:
+//		
+// Return:
+//		Void
+//---------------------------------------------------------------
 	private void FireGun (){
 		if (XCI.GetAxis (XboxAxis.RightTrigger, controller) > 0.1) {
 			if (Time.time - shootingTimer > timeBetweenShots) {
@@ -64,7 +91,15 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	//Calls whenever the player moves
+//---------------------------------------------------------------
+//	MovePlayer()
+// Called when player uses relevant control, moving the player
+//
+// Param:
+//		
+// Return:
+//		Void
+//---------------------------------------------------------------
 	private void MovePlayer (){
 		float axisX = XCI.GetAxis (XboxAxis.LeftStickX, controller);
 		float axisZ = XCI.GetAxis (XboxAxis.LeftStickY, controller);
@@ -74,8 +109,15 @@ public class PlayerController : MonoBehaviour {
 			rigidBody.velocity = rigidBody.velocity.normalized * maxSpeed;
 		}
 	}
-
-	//Calls whenever player turns
+//---------------------------------------------------------------
+//	RotatePlayer()
+// Called when player uses relevant control, rotating the player
+//
+// Param:
+//		
+// Return:
+//		Void
+//---------------------------------------------------------------
 	private void RotatePlayer(){
 		float rotateAxisX = XCI.GetAxis (XboxAxis.RightStickX, controller);
 		float rotateAxisZ = XCI.GetAxis (XboxAxis.RightStickY, controller);
